@@ -13,8 +13,35 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">	
 	<link href="/track2_webprogram_3차_김성용/css/common.css" rel="stylesheet">
 	<link href="/track2_webprogram_3차_김성용/css/layout.css" rel="stylesheet">	
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 <body>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+    	$("#btnCheck").click(function(){  
+    	    var urlLocation="NewsIdCheck";  
+    	    var params="id="+ $('#t_id').val();
+		        $.ajax({
+		            type : "POST",
+		            url : urlLocation,
+		            data: params,
+		            dataType : "json",
+		            error : function(){
+		                alert('통신실패!!');
+		            },
+		            success : function(data){
+//	                alert("통신데이터 값 : " + data);
+	                	$("#s_name").html(data.t_name2);
+	                	$("#s_addr").html(data.t_addr2);
+		            }
+		             
+		        });
+    	 });
+ 
+    });
+</script>
 	
 	<div class="container">
 <!--
@@ -25,6 +52,12 @@
 		<div class="leftmargin">
 			<h1 class="t_tit">성명 :track2 WebProgram 3차 김성용</h1>
 		</div>		
+	
+		id:<input type ="text" id ="t_id" size="5">
+		<input type="button" value="id  검사" id="btnCheck">
+		<span id="s_name"></span>
+		<span id="s_addr"></span>
+			
 		<form name ="list">
 		<div class="search_wrap">
 			<div class="record_group">
@@ -112,6 +145,7 @@
 		fm.method ="post";
 		fm.submit();
 	}
+	
  </script>
 
 </html>
